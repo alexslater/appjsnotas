@@ -2,95 +2,67 @@ const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
 
 class Estudiante {
-    constructor (nombre, apellido, n1, n2, n3) {
+    constructor (nombre, apellido, nota1, nota2, nota3) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
-        this.n1 = n1;
-        this.n2 = n2;
-        this.n3 = n3;
+        this.notas = [nota1, nota2, nota3]
         this.aprobado = false;
-        this.cerrado = false;
-        this.promedio = 0;
+        this.promedio = 0; 
     }
 
     promedioNotas() {
-        return (this.n1 + this.n2 + this.n3) / 3;
+        return (this.notas[0]+ this.notas[1] + this.notas[2]) / 3;
     }
 
-    estadoFinal () {
+    esAprobado () {
         return this.aprobado;
     }
 
     cerrarAsignatura() {
-        this.promedio = (this.n1 + this.n2 + this.n3) / 3;
+        this.promedio = this.promedioNotas();
         if(this.promedio > 4)
             this.aprobado = true;
         else
             this.aprobado = false;
-        this.cerrado = true;
     }
 
-    estudianteCerrado() {
-        return this.cerrado;
-    }
-
-    obtenerN1() {
-        return this.n1;
-    }
-
-    obtenerN2() {
-        return this.n2;
-    }
-
-    obtenerN3() {
-        return this.n3;
+    obtenerNota(numeronota)
+    {
+        return this.notas[numeronota - 1];
     }
 
 }
 
 
 /* Solicita una nota para el estudiante */
-function ingresarNota() {
-    while(true) {
-        let nota = parseFloat(prompt("Ingrese nota del estudiante: "));
-        if(nota >= 1.0 && nota <= 7.0)
-            return nota;
-        else
-            alert("Debe ingresar una nota válida (entre 1.0 y 7.0)!");
-    }
+function ingresarNota(n_nota) {
+    let nota = parseFloat(prompt("Ingrese NOTA " + n_nota + " del estudiante: "));
+    if(nota >= 1.0 && nota <= 7.0)
+        return nota;
+    else
+        alert("Debe ingresar una nota válida (entre 1.0 y 7.0)!");
+    ingresarNota();
+
 }
 
 /*Solicita nombre del estudiante */
-function ingresarNombre(){
-    while(true) {
-        let nombre = prompt("Ingrese nombre del estudiante: ");
-        if(nombre.length > 0)
-            return nombre;
-        else
-            alert("El nombre debe tener como mínumo 1 caracter!");
-    }
-}
-
-/*Solicita apellido del estudiante */
-function ingresarApellido(){
-    while(true) {
-        let apellido = prompt("Ingrese apellido del estudiante: ");
-        if(apellido.length > 0)
-            return apellido;
-        else
-            alert("El apellido debe tener como mínumo 1 caracter!");
-    }
+function ingresarDato(clave){
+    let dato = prompt("Ingrese " + clave.toUpperCase() + " del estudiante: ");
+    if(dato.length > 0)
+        return dato;
+    else
+        alert("El " + clave.toUpperCase() + " debe tener como mínumo 1 caracter!");
+    ingresarDato(clave);
 }
 
 /* Función que maneja el ingreso de un nuevo estudiante */
 function nuevoEstudiante() {
-    let nombre = ingresarNombre();
-    let apellido = ingresarApellido();
-    let n1 = ingresarNota();
-    let n2 = ingresarNota();
-    let n3 = ingresarNota();
+    let nombre = ingresarDato("nombre");
+    let apellido = ingresarDato("apellido");
+    let n1 = ingresarNota(1);
+    let n2 = ingresarNota(2);
+    let n3 = ingresarNota(3);
     estudiantes.push(new Estudiante(nombre, apellido, n1, n2, n3));
-
 }
 
 /* Función que hace el calculo del promedio del estudiante y cierra su proceso */
@@ -102,8 +74,8 @@ function cerrarAsignatura(){
         alert("No hay estudiantes agregados para cerrar asignatura!")
     }
     else {
-        for(const e of estudiantes) {
-            e.cerrarAsignatura();
+        for(const estudiante of estudiantes) {
+            estudiante.cerrarAsignatura();
             n_estudiantes++;
         }
         alert("Asignatura cerradas para " + n_estudiantes + " estudiantes en total!");
@@ -123,7 +95,7 @@ function estadisticaGeneral() {
     }
     else {
         for(const e of estudiantes) {
-                if (e.estadoFinal())
+                if (e.esAprobado())
                     aprobados++;
                 else
                     reprobados++;
@@ -137,7 +109,8 @@ function estadisticaGeneral() {
 
 
 /* PROGRAMA PRINCIPAL */
-while(true) {
+let continuar = true
+while(continuar) {
     let op = parseInt(prompt("Bienvenido a la aplicación:\n1. Ingresar estudiantes\n2. Cerrar asigantura\n3. Reportar estadístcas generales\n4. Salir"));
     if(op == 1) {
         nuevoEstudiante();    
@@ -149,12 +122,14 @@ while(true) {
         estadisticaGeneral();
     }
     else if (op == 4) {
+        continuar = false;
         alert("Gracias por usar este programa!");
         break;
     }
     else {
         alert("Debe ingresar una opción válida del menú!");
     }
+    
 }
 
 

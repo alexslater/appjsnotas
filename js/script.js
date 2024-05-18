@@ -106,30 +106,32 @@ function estadisticaGeneral() {
     }
 }
     
+/* funcion para ejecutar el programa principal */
+function main()
+{
+    let continuar = true
+    while(continuar) {
+        let op = parseInt(prompt("Bienvenido a la aplicación:\n1. Ingresar estudiantes\n2. Cerrar asigantura\n3. Reportar estadístcas generales\n4. Salir"));
+        if(op == 1) {
+            nuevoEstudiante();    
+        }
+        else if (op == 2) {
+            cerrarAsignatura();
+        }
+        else if (op == 3) {
+            estadisticaGeneral();
+        }
+        else if (op == 4) {
+            continuar = false;
+            alert("Gracias por usar este programa!");
+            break;
+        }
+        else {
+            alert("Debe ingresar una opción válida del menú!");
+        }
+        
+    }
 
-
-/* PROGRAMA PRINCIPAL */
-let continuar = true
-while(continuar) {
-    let op = parseInt(prompt("Bienvenido a la aplicación:\n1. Ingresar estudiantes\n2. Cerrar asigantura\n3. Reportar estadístcas generales\n4. Salir"));
-    if(op == 1) {
-        nuevoEstudiante();    
-    }
-    else if (op == 2) {
-        cerrarAsignatura();
-    }
-    else if (op == 3) {
-        estadisticaGeneral();
-    }
-    else if (op == 4) {
-        continuar = false;
-        alert("Gracias por usar este programa!");
-        break;
-    }
-    else {
-        alert("Debe ingresar una opción válida del menú!");
-    }
-    
 }
 
-
+main();

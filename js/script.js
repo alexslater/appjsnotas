@@ -150,21 +150,40 @@ function escribirTabla() {
             </tr>
        `
     
+
+    }
+
     // Finalmente cerrar la estructura de la tabla
-    textoHTML = `
+    textoHTML = textoHTML + `
         </tbody>
     </table>
     `
 
-    }
+    console.log(textoHTML);
+    div_tabla_resultados.innerHTML = textoHTML;
+
+
+
 }
 
+/* DESARROLLADO SOLO PARA TESTEAR AGREGAR DATOS DE LA TABLA */
+function datosEstudiantes() {
+
+    // Agregamos estudiantes a los objetos.
+    estudiantes.push(new Estudiante("Juan", "Perez", 4.3, 5.4, 6.0));
+    estudiantes.push(new Estudiante("Pedro", "Pedro Pe", 3.0, 4.1, 2.7));
+    estudiantes.push(new Estudiante("Alex", "Slater", 6.0, 6.0, 7.0));
+
+    // Cerramos asignatuas
+
+}
 
 /* funcion para ejecutar el programa principal */
 function main()
 {
 
     // Probando la función de escritura de tabla con DOM
+    datosEstudiantes();
     escribirTabla();
 
 }

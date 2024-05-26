@@ -40,23 +40,62 @@
                     <h2>Ingreso de calificaciones del estudiante</h2>
                 </div>
                 <div class="row border border-black rounded">
-                    <div class="row ingreso-de-datos">
-                        <div class="col">
-                            <p>Este proyecto corresponde a la primera entrega del curso de JavaScript. La aplicación presenta un menú de usuario con cuatro opciones:</p>
-                        </div>
-                        <div class="col">
-                            <ol>
-                                <li>Ingresar estudiante: permite el ingreso de información del estudiante (nombre, apellido y tres calificaciones)</li>
-                                <li>Cerrar asignatura: corre un proceso de calculo de promedio y modificación de estado de aprobación final de cada estudiante.</li>
-                                <li>Estadísticas: calculo del número de aprobados y reprobados, además el promedio general del curso.</li>
-                                <li>Salir: sale de la aplicación.</li>
-                            </ol>
-                        </div>
+                    <div class="row ingreso-de-datos">                     
+                        <form>
+                            <div class="container">
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-end">
+                                        <label for="nombre">Nombre:</label>
+                                       
+                                    </div>
+                                    <div class="col d-flex justify-content-start">
+                                        <input type="text" id="est_nombre" name="nombre">
+                                    </div>
+                                </div>
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-end">
+                                        <label for="apellido">Apellido:</label>
+                                    </div>
+                                    <div class="col d-flex justify-content-start">
+                                        <input type="text" id="est_apellido" name="apellido">
+                                    </div>
+                                </div>
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-end">
+                                        <label for="Nota 1">Nota 1:</label>
+                                    </div>
+                                    <div class="col d-flex justify-content-start">
+                                        <input type="text" id="est_nota_1" name="Nota 1">
+                                    </div>
+                                </div>   
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-end">
+                                        <label for="Nota 2">Nota 2:</label>
+                                    </div>
+                                    <div class="col d-flex justify-content-start">
+                                        <input type="text" id="est_nota_2" name="Nota 2">
+                                    </div>
+                                </div>  
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-end">
+                                        <label for="Nota 3">Nota 3:</label>
+                                    </div>
+                                    <div class="col d-flex justify-content-start">
+                                        <input type="text" id="est_nota_3" name="Nota 3">
+                                    </div>
+                                </div>  
+                                <div class="row item-formulario">
+                                    <div class="col d-flex justify-content-evenly">
+                                        <input type="submit" value="Ingresar estudiante" class="btn btn-success">
+                                    </div>
+                                </div>  
+
+                            </div>
+                       
+                           
+                        </form>
                     </div>
                     <div class="row botonera">
-                        <div class="col d-flex justify-content-evenly">
-                            <button type="button" class="btn btn-success" id="ingresar-estudiante">Ingresar estudiante</button>
-                        </div>
                         <div class="col d-flex justify-content-evenly">
                             <button type="button" class="btn btn-success" id="calcular-promedios">Calcular promedios</button>
                         </div>

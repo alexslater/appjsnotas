@@ -122,7 +122,9 @@ function escribirTabla() {
     let div_tabla_resultados = document.getElementById('cont-tabla-de-notas');
     let textoHTML = "";
 
+    // TODO ESTO PASAR A MANIPUACION CON DOM
     // Primero construir cabecera de la tabla
+    
     textoHTML = `
     <table class="table" id="tbl-tabla-de-notas">
         <thead>

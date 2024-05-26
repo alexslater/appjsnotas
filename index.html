@@ -5,9 +5,17 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta name="description" content="Amplitud académica sitio de cursos de formación general">
+        <meta name="keywords" content="CURSOS ELECTVOS UNIVERSIDAD PROYECTOS APRENDIZAJE CERTIFICACIONES DESIGN-THINKING D-SCHOOL UNIVERSIDAD MAYOR">
+
         <link rel="shortcut icon" href="a">
-        <title>Pre-Entrega 01 - Proyecto JavaScript</title> 
+        <title>Pre-Entrega 02 - Proyecto JavaScript</title> 
         <script defer src="./js/script.js"></script>
+        
+        <!-- Link para CSS del framework Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
         
         <!-- Fuentes de google para el proyecto -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +27,87 @@
 
     </head>
     <body>
-        <h1>Entrega 01 - Curso JavaScript</h1>
-        <h2>Descripción del simulador</h2>
-        <p>Este proyecto corresponde a la primera entrega del curso de JavaScript. La aplicación presenta un menú de usuario con cuatro opciones:</p>
-        <ol>
-            <li>Ingresar estudiante: permite el ingreso de información del estudiante (nombre, apellido y tres calificaciones)</li>
-            <li>Cerrar asignatura: corre un proceso de calculo de promedio y modificación de estado de aprobación final de cada estudiante.</li>
-            <li>Estadísticas: calculo del número de aprobados y reprobados, además el promedio general del curso.</li>
-            <li>Salir: sale de la aplicación.</li>
-        </ol>
-        <p>Elaborado por Alex Slater</p>
+        <header class="container">
+            <div class ="container cabecera">
+                <div class="row">
+                    <h1 class="texto-cabecera">Entrega 01 - Curso JavaScript</h1>
+                </div>
+            </div>
+        </header>
+        <main class="container">
+            <section class="container ingreso-de-notas">
+                <div class="row border rounded texto-titulo-seccion">
+                    <h2>Ingreso de calificaciones del estudiante</h2>
+                </div>
+                <div class="row border border-black rounded">
+                    <div class="col">
+                        <p>Este proyecto corresponde a la primera entrega del curso de JavaScript. La aplicación presenta un menú de usuario con cuatro opciones:</p>
+                    </div>
+                    <div class="col">
+                        <ol>
+                            <li>Ingresar estudiante: permite el ingreso de información del estudiante (nombre, apellido y tres calificaciones)</li>
+                            <li>Cerrar asignatura: corre un proceso de calculo de promedio y modificación de estado de aprobación final de cada estudiante.</li>
+                            <li>Estadísticas: calculo del número de aprobados y reprobados, además el promedio general del curso.</li>
+                            <li>Salir: sale de la aplicación.</li>
+                        </ol>
+                    </div>
+                    
+                </div>
+            </section>
+            <section class="container resultados-de-notas">
+                <div class="row border rounded texto-titulo-seccion">
+                    <h2>Tabla de resultados</h2>
+                </div>
+                <div class="row border border-black rounded">
+                    <div class="container tabla-resultados">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="footer-texto">Hecho por Alex Slater</p>
+                </div>
+                <div class="col">
+                    <a class="link-correo" href="mailto:awslater@gmail.com">Contacto: awslater@gmail.com</a>
+                </div>
+            </div>
+        </footer>
+
+        
+        <!-- Incluir el script JS de bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous"></script>
+
     </body>
 </html>

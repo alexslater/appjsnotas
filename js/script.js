@@ -18,6 +18,8 @@ class Estudiante {
         return this.aprobado;
     }
 
+    
+       
     cerrarAsignatura() {
         this.promedio = this.promedioNotas();
         if(this.promedio > 4)

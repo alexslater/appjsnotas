@@ -6,8 +6,32 @@ header {
   background-color: white;
 }
 
-
-
 body {
   margin: 10px;
+}
+
+.btn-secondary {
+  background-color: rgb(32, 31, 31);
+}
+
+
+.ingreso-de-notas {
+  margin: 10px;
+  padding: 5px;
+}
+
+.resultados-de-notas {
+  margin: 10px;
+  padding: 5px;
+}
+
+.texto-titulo-seccion {
+  background-color: #417b5a;
+  color: #ffffff;
+  padding: 5px;
+}
+
+.tabla-resultados {
+  margin: 5px;
+  padding: 5px;
 }

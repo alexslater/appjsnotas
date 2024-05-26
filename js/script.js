@@ -1,36 +1,40 @@
 const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
 
+
 class Estudiante {
     constructor (nombre, apellido, nota1, nota2, nota3) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
         this.notas = [nota1, nota2, nota3]
-        this.aprobado = false;
+        this.estado = 0;
         this.promedio = 0; 
     }
 
-    promedioNotas() {
-        return (this.notas[0]+ this.notas[1] + this.notas[2]) / 3;
+    promediarNotas() {
+        this.promedio = (this.notas[0]+ this.notas[1] + this.notas[2]) / 3;
     }
-
-    esAprobado () {
-        return this.aprobado;
-    }
-
     
-       
-    cerrarAsignatura() {
-        this.promedio = this.promedioNotas();
-        if(this.promedio > 4)
-            this.aprobado = true;
-        else
-            this.aprobado = false;
+    modificarEstado(estado) {
+        this.estado = estado;
     }
 
-    obtenerNota(numeronota)
-    {
-        return this.notas[numeronota - 1];
+    obtenerEstado() {
+        switch(this.estado) {
+            case 0:
+                return "En curso";
+            case 1:
+                return "Aprobado";
+            case 2:
+                return "Reprobado";
+        }
+    }
+
+    cerrarAsignatura() {
+        if(this.promedio > 4)
+            this.estado = 1;
+        else
+            this.estado = 2;
     }
 
 }
@@ -107,32 +111,61 @@ function estadisticaGeneral() {
         alert("Estadistica general\nNº Estudiantes Aprobados: " + aprobados + "\nNº Estudiantes Reprobados: " + reprobados + "\nPromedio general curso: " + promedio_general);
     }
 }
+   
+
+/* TEST ESCRIBE TABLA */
+function escribirTabla() {
+
+    let div_tabla_resultados = document.getElementById('tabla-de-notas');
+    let textoHTML = ""
+
+    // Primero construir cabecera de la tabla
+    textoHTML = `
+    <table class="table">
+        <thead>
+        <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Nota 1</th>
+        <th scope="col">Nota 2</th>
+        <th scope="col">Nota 3</th>
+        <th scope="col">Promedio</th>
+        <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+    `
+    // Ahora iterar sobre estudiantes para ingresar los datos
     
+    for(const e of estudiantes) {
+       textoHTML = textoHTML + `
+            <tr>
+                <td>${e.nombre}</td>
+                <td>${e.apellido}</td>
+                <td>${e.notas[0]}</td>
+                <td>${e.notas[1]}</td>
+                <td>${e.notas[2]}</td>
+                <td>${e.promedio}</td>
+                <td>${e.obtenerEstado()}</td>
+            </tr>
+       `
+    
+    // Finalmente cerrar la estructura de la tabla
+    textoHTML = `
+        </tbody>
+    </table>
+    `
+
+    }
+}
+
+
 /* funcion para ejecutar el programa principal */
 function main()
 {
-    let continuar = true
-    while(continuar) {
-        let op = parseInt(prompt("Bienvenido a la aplicación:\n1. Ingresar estudiantes\n2. Cerrar asigantura\n3. Reportar estadístcas generales\n4. Salir"));
-        if(op == 1) {
-            nuevoEstudiante();    
-        }
-        else if (op == 2) {
-            cerrarAsignatura();
-        }
-        else if (op == 3) {
-            estadisticaGeneral();
-        }
-        else if (op == 4) {
-            continuar = false;
-            alert("Gracias por usar este programa!");
-            break;
-        }
-        else {
-            alert("Debe ingresar una opción válida del menú!");
-        }
-        
-    }
+
+    // Probando la función de escritura de tabla con DOM
+    escribirTabla();
 
 }
 

@@ -30,7 +30,7 @@
         <header class="container">
             <div class ="container cabecera">
                 <div class="row">
-                    <h1 class="texto-cabecera">Entrega 01 - Curso JavaScript</h1>
+                    <h1 class="texto-cabecera">Entrega 02 - Curso JavaScript - App Notas Estudiantes</h1>
                 </div>
             </div>
         </header>
@@ -40,18 +40,30 @@
                     <h2>Ingreso de calificaciones del estudiante</h2>
                 </div>
                 <div class="row border border-black rounded">
-                    <div class="col">
-                        <p>Este proyecto corresponde a la primera entrega del curso de JavaScript. La aplicación presenta un menú de usuario con cuatro opciones:</p>
+                    <div class="row ingreso-de-datos">
+                        <div class="col">
+                            <p>Este proyecto corresponde a la primera entrega del curso de JavaScript. La aplicación presenta un menú de usuario con cuatro opciones:</p>
+                        </div>
+                        <div class="col">
+                            <ol>
+                                <li>Ingresar estudiante: permite el ingreso de información del estudiante (nombre, apellido y tres calificaciones)</li>
+                                <li>Cerrar asignatura: corre un proceso de calculo de promedio y modificación de estado de aprobación final de cada estudiante.</li>
+                                <li>Estadísticas: calculo del número de aprobados y reprobados, además el promedio general del curso.</li>
+                                <li>Salir: sale de la aplicación.</li>
+                            </ol>
+                        </div>
                     </div>
-                    <div class="col">
-                        <ol>
-                            <li>Ingresar estudiante: permite el ingreso de información del estudiante (nombre, apellido y tres calificaciones)</li>
-                            <li>Cerrar asignatura: corre un proceso de calculo de promedio y modificación de estado de aprobación final de cada estudiante.</li>
-                            <li>Estadísticas: calculo del número de aprobados y reprobados, además el promedio general del curso.</li>
-                            <li>Salir: sale de la aplicación.</li>
-                        </ol>
+                    <div class="row botonera">
+                        <div class="col d-flex justify-content-evenly">
+                            <button type="button" class="btn btn-success" id="ingresar-estudiante">Ingresar estudiante</button>
+                        </div>
+                        <div class="col d-flex justify-content-evenly">
+                            <button type="button" class="btn btn-success" id="calcular-promedios">Calcular promedios</button>
+                        </div>
+                        <div class="col d-flex justify-content-evenly">
+                            <button type="button" class="btn btn-success" id="cerrar-estudiantes">Cerrar estudiantes</button>
+                        </div>
                     </div>
-                    
                 </div>
             </section>
             <section class="container resultados-de-notas">
@@ -59,18 +71,16 @@
                     <h2>Tabla de resultados</h2>
                 </div>
                 <div class="row border border-black rounded">
-                    <div class="container tabla-resultados" id="tabla-de-notas">
-                     
-                    </div>
+                    <div class="container tabla-resultados" id="cont-tabla-de-notas"></div>
                 </div>
             </section>
         </main>
         <footer class="container">
             <div class="row">
-                <div class="col">
+                <div class="col d-flex justify-content-evenly">
                     <p class="footer-texto">Hecho por Alex Slater</p>
                 </div>
-                <div class="col">
+                <div class="col d-flex justify-content-evenly">
                     <a class="link-correo" href="mailto:awslater@gmail.com">Contacto: awslater@gmail.com</a>
                 </div>
             </div>

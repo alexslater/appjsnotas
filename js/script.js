@@ -12,7 +12,8 @@ class Estudiante {
     }
 
     promediarNotas() {
-        this.promedio = (this.notas[0]+ this.notas[1] + this.notas[2]) / 3;
+        let prom = (this.notas[0]+ this.notas[1] + this.notas[2]) / 3;
+        this.promedio = parseFloat(prom.toFixed(1));
     }
     
     modificarEstado(estado) {
@@ -72,7 +73,7 @@ function nuevoEstudiante() {
 }
 
 /* Función que hace el calculo del promedio del estudiante y cierra su proceso */
-function cerrarAsignatura(){
+function cerrarEstudiantes(){
     // Procesar
     let n_estudiantes = 0
     if(estudiantes.length == 0)
@@ -84,7 +85,9 @@ function cerrarAsignatura(){
             estudiante.cerrarAsignatura();
             n_estudiantes++;
         }
-        alert("Asignatura cerradas para " + n_estudiantes + " estudiantes en total!");
+        limpiarTabla();
+        escribirTabla();
+        //alert("Asignatura cerradas para " + n_estudiantes + " estudiantes en total!");
     }
 }
 
@@ -116,12 +119,12 @@ function estadisticaGeneral() {
 /* TEST ESCRIBE TABLA */
 function escribirTabla() {
 
-    let div_tabla_resultados = document.getElementById('tabla-de-notas');
-    let textoHTML = ""
+    let div_tabla_resultados = document.getElementById('cont-tabla-de-notas');
+    let textoHTML = "";
 
     // Primero construir cabecera de la tabla
     textoHTML = `
-    <table class="table">
+    <table class="table" id="tbl-tabla-de-notas">
         <thead>
         <tr>
         <th scope="col">Nombre</th>
@@ -158,11 +161,8 @@ function escribirTabla() {
         </tbody>
     </table>
     `
-
     console.log(textoHTML);
     div_tabla_resultados.innerHTML = textoHTML;
-
-
 
 }
 
@@ -178,14 +178,46 @@ function datosEstudiantes() {
 
 }
 
+function limpiarTabla() {
+
+    let tabla_resultados = document.getElementById('tbl-tabla-de-notas');
+    tabla_resultados.remove();
+
+}
+
+
+function calcularPromedios() {
+    
+    // Recorrer la tabla para calcular todos los promedios de estudiantes.
+    for(const e of estudiantes) {
+        e.promediarNotas();
+        console.log(e.promedio);
+    }
+        
+    // Actualizar promedios de tabla
+    limpiarTabla();
+    escribirTabla();
+   
+}
+
+
+
 /* funcion para ejecutar el programa principal */
 function main()
 {
 
+    /* Añade el manejo de eventos mediante los botones */
+    let btn_calcular_promedios = document.getElementById("calcular-promedios");
+    btn_calcular_promedios.addEventListener("click", calcularPromedios);
+    
+    let btn_cerrar_estudiantes = document.getElementById("cerrar-estudiantes");
+    btn_cerrar_estudiantes.addEventListener("click", cerrarEstudiantes);
+
+
     // Probando la función de escritura de tabla con DOM
     datosEstudiantes();
     escribirTabla();
-
+    
 }
 
 main();

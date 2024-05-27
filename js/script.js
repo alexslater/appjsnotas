@@ -124,7 +124,7 @@ function escribirTabla() {
 
     // TODO ESTO PASAR A MANIPUACION CON DOM
     // Primero construir cabecera de la tabla
-    
+
     textoHTML = `
     <table class="table" id="tbl-tabla-de-notas">
         <thead>
@@ -163,7 +163,7 @@ function escribirTabla() {
         </tbody>
     </table>
     `
-    console.log(textoHTML);
+
     div_tabla_resultados.innerHTML = textoHTML;
 
 }
@@ -204,6 +204,8 @@ function calcularPromedios() {
 
 
 
+
+
 /* funcion para ejecutar el programa principal */
 function main()
 {
@@ -215,10 +217,35 @@ function main()
     let btn_cerrar_estudiantes = document.getElementById("cerrar-estudiantes");
     btn_cerrar_estudiantes.addEventListener("click", cerrarEstudiantes);
 
+    let btn_ingresar_estudiante = document.getElementById("ingresar-estudiante");
+    btn_ingresar_estudiante.addEventListener("click", () => {
+        const nombre = document.getElementById("nombre").value
+        const apellido = document.getElementById("apellido").value
+
+        const nota1 = parseFloat(document.getElementById("Nota 1").value)
+        const nota2 = parseFloat(document.getElementById("Nota 2").value)
+        const nota3 = parseFloat(document.getElementById("Nota 3").value)
+
+        if(nota1 < 1 || nota1 > 7)
+            alert("Una de las notas es inválida!")
+        else if(nota2 < 1 || nota2 > 7)
+            alert("Una de las notas es inválida!")
+        else if(nota3 < 1 || nota3 > 7)
+            alert("Una de las notas es inválida!")
+        else {            
+            console.log("Datos leidos")
+            estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3))
+            escribirTabla();
+        }
+
+
+
+    })
+
 
     // Probando la función de escritura de tabla con DOM
-    datosEstudiantes();
-    escribirTabla();
+    //datosEstudiantes();
+   // escribirTabla();
     
 }
 

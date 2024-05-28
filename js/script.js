@@ -77,9 +77,9 @@ function cerrarEstudiantes(){
     // Procesar
     let n_estudiantes = 0
     if(estudiantes.length == 0)
-    {
-        alert("No hay estudiantes agregados para cerrar asignatura!")
-    }
+        alert("No hay estudiantes agregados para cerrar asignatura!");
+    else if(!promediosCalculados())
+        alert("Primero debe presionar calcular promedios antes de cerrar asignatura!");
     else {
         for(const estudiante of estudiantes) {
             estudiante.cerrarAsignatura();
@@ -92,39 +92,13 @@ function cerrarEstudiantes(){
 }
 
 
-/* Presenta estadísticas generales */
-function estadisticaGeneral() {
-    let suma_notas = 0;
-    let n_estudiantes = 0;
-    let promedio_general = 0;
-    let aprobados = 0;
-    let reprobados = 0;
-    if(estudiantes.length == 0) {
-        alert("No hay estudiantes para realizar la estadística!")
-    }
-    else {
-        for(const e of estudiantes) {
-                if (e.esAprobado())
-                    aprobados++;
-                else
-                    reprobados++;
-                suma_notas = suma_notas + e.promedioNotas();
-                n_estudiantes++;
-        }            promedio_general = suma_notas / n_estudiantes;
-        alert("Estadistica general\nNº Estudiantes Aprobados: " + aprobados + "\nNº Estudiantes Reprobados: " + reprobados + "\nPromedio general curso: " + promedio_general);
-    }
-}
-   
-
 /* TEST ESCRIBE TABLA */
 function escribirTabla() {
 
     let div_tabla_resultados = document.getElementById('cont-tabla-de-notas');
     let textoHTML = "";
 
-    // TODO ESTO PASAR A MANIPUACION CON DOM
-    // Primero construir cabecera de la tabla
-
+    // Creación del texto innerHTML
     textoHTML = `
     <table class="table" id="tbl-tabla-de-notas">
         <thead>
@@ -168,18 +142,6 @@ function escribirTabla() {
 
 }
 
-/* DESARROLLADO SOLO PARA TESTEAR AGREGAR DATOS DE LA TABLA */
-function datosEstudiantes() {
-
-    // Agregamos estudiantes a los objetos.
-    estudiantes.push(new Estudiante("Juan", "Perez", 4.3, 5.4, 6.0));
-    estudiantes.push(new Estudiante("Pedro", "Pedro Pe", 3.0, 4.1, 2.7));
-    estudiantes.push(new Estudiante("Alex", "Slater", 6.0, 6.0, 7.0));
-
-    // Cerramos asignatuas
-
-}
-
 function limpiarTabla() {
 
     let tabla_resultados = document.getElementById('tbl-tabla-de-notas');
@@ -187,24 +149,46 @@ function limpiarTabla() {
 
 }
 
-
 function calcularPromedios() {
     
-    // Recorrer la tabla para calcular todos los promedios de estudiantes.
-    for(const e of estudiantes) {
-        e.promediarNotas();
-        console.log(e.promedio);
+    if(estudiantes.length == 0)
+        alert("No hay estudiantes ingresados para calcular promedios!");
+    else {
+        // Recorrer la tabla para calcular todos los promedios de estudiantes.
+        for(const e of estudiantes) {
+            e.promediarNotas();
+            console.log(e.promedio);
+        }
+   
+         // Actualizar promedios de tabla
+        limpiarTabla();
+        escribirTabla();   
     }
         
-    // Actualizar promedios de tabla
-    limpiarTabla();
-    escribirTabla();
    
 }
 
+function limpiarCuadrosEntrada() {
 
+    document.getElementById("nombre").value = ""
+    document.getElementById("apellido").value = ""
+    document.getElementById("Nota 1").value = ""
+    document.getElementById("Nota 2").value = ""
+    document.getElementById("Nota 3").value = ""
 
+}
 
+function promediosCalculados() {
+
+    let promedios_listos = false;
+
+    for(const e of estudiantes) {
+        if(e.promedio > 0)
+            promedios_listos = true;
+    }
+
+    return promedios_listos
+}
 
 /* funcion para ejecutar el programa principal */
 function main()
@@ -236,17 +220,12 @@ function main()
             console.log("Datos leidos")
             estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3))
             escribirTabla();
+            // Limpiar ahora
+            limpiarCuadrosEntrada();
         }
-
-
 
     })
 
-
-    // Probando la función de escritura de tabla con DOM
-    //datosEstudiantes();
-   // escribirTabla();
-    
 }
 
 main();

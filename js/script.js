@@ -2,7 +2,7 @@
 const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
 class Estudiante {
-    constructor (nombre, apellido, nota1, nota2, nota3, estado = 0, promedio = 0) {
+    constructor (nombre, apellido, nota1, nota2, nota3, promedio = 0, estado = 0) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
         this.notas = [nota1, nota2, nota3]
@@ -167,6 +167,10 @@ function recuperarInformacion() {
         console.log(ls_estudiantes[e]['notas']);
         const estado = ls_estudiantes[e]['estado'];
         const promedio = ls_estudiantes[e]['promedio'];
+        console.log("ESTADO GUARDADO: ")
+        console.log(ls_estudiantes[e]['estado'])
+        console.log("PROMEDIO GUARDADO: ")
+        console.log(ls_estudiantes[e]['promedio'])
         estudiantes.push(new Estudiante(nombre, apellido, notas[0], notas[1], notas[2], promedio, estado));
    
     }

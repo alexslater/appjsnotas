@@ -1,14 +1,13 @@
+
 const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
-
-
 class Estudiante {
-    constructor (nombre, apellido, nota1, nota2, nota3) {
+    constructor (nombre, apellido, nota1, nota2, nota3, estado = 0, promedio = 0) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
         this.notas = [nota1, nota2, nota3]
-        this.estado = 0;
-        this.promedio = 0; 
+        this.estado = estado;
+        this.promedio = promedio; 
     }
 
     promediarNotas() {
@@ -36,6 +35,10 @@ class Estudiante {
             this.estado = 1;
         else
             this.estado = 2;
+    }
+
+    modificarPromedio(promedio) {
+        this.promedio = promedio;
     }
 
 }
@@ -87,12 +90,13 @@ function cerrarEstudiantes(){
         }
         limpiarTabla();
         escribirTabla();
+        guardarInformacion();
         //alert("Asignatura cerradas para " + n_estudiantes + " estudiantes en total!");
     }
+
 }
 
 
-/* TEST ESCRIBE TABLA */
 function escribirTabla() {
 
     let div_tabla_resultados = document.getElementById('cont-tabla-de-notas');
@@ -142,6 +146,33 @@ function escribirTabla() {
 
 }
 
+function guardarInformacion() {
+
+    localStorage.clear();
+    let arreglo_estudiantes = []
+    for(const e of estudiantes)
+        arreglo_estudiantes.push(e);
+    localStorage.setItem("estudiantes", JSON.stringify(arreglo_estudiantes));
+
+}
+
+function recuperarInformacion() {
+
+    let ls_estudiantes = JSON.parse(localStorage.getItem("estudiantes"));
+    console.log(ls_estudiantes);
+    for(const e in ls_estudiantes){
+        const nombre = ls_estudiantes[e]['nombre'];
+        const apellido = ls_estudiantes[e]['apellido'];
+        const notas = ls_estudiantes[e]['notas'];
+        console.log(ls_estudiantes[e]['notas']);
+        const estado = ls_estudiantes[e]['estado'];
+        const promedio = ls_estudiantes[e]['promedio'];
+        estudiantes.push(new Estudiante(nombre, apellido, notas[0], notas[1], notas[2], promedio, estado));
+   
+    }
+        
+}
+
 function limpiarTabla() {
 
     let tabla_resultados = document.getElementById('tbl-tabla-de-notas');
@@ -162,7 +193,8 @@ function calcularPromedios() {
    
          // Actualizar promedios de tabla
         limpiarTabla();
-        escribirTabla();   
+        escribirTabla();
+        guardarInformacion();
     }
         
    
@@ -201,6 +233,11 @@ function main()
     let btn_cerrar_estudiantes = document.getElementById("cerrar-estudiantes");
     btn_cerrar_estudiantes.addEventListener("click", cerrarEstudiantes);
 
+    /* Recuperar datos de localStorage y precargar */
+    recuperarInformacion();
+    escribirTabla();
+
+
     let btn_ingresar_estudiante = document.getElementById("ingresar-estudiante");
     btn_ingresar_estudiante.addEventListener("click", () => {
         const nombre = document.getElementById("nombre").value
@@ -220,6 +257,7 @@ function main()
             console.log("Datos leidos")
             estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3))
             escribirTabla();
+            guardarInformacion();
             // Limpiar ahora
             limpiarCuadrosEntrada();
         }

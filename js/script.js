@@ -230,24 +230,30 @@ function promediosCalculados() {
     return promedios_listos
 }
 
-/*funcion para llegar combobox con datos*/
-function cargarDatosCombo() {
+/*funcion para llegar combobox con datos, función asíncrona */
+async function cargarDatosCombo() {
 
     comboOpciones = document.querySelector("#asignaturas");
+    let apiURL = "https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/";
+    let respuesta = {"Codigo Asignatura":"ABDC0000", "Nombre Asignatura": "N/A"};
 
-    fetch("https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/")
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(element => {
+    try {
+        let peticion = await fetch(apiURL);
+        respuesta = await peticion.json();
+    } catch(err) {
+        console.log("Error al procesar la petición al servidor", err);
+        alert("No se ha podido completar la carga de nombres de asignatura!");
+    } finally {
+        respuesta.forEach(element => {
             const opt = document.createElement("option");
             console.log(element['Nombre Asignatura']);
             opt.setAttribute("value", element['Nombre Asignatura']);
             opt.innerHTML = element['Codigo Asignatura'] + " - " + element['Nombre Asignatura']
             comboOpciones.appendChild(opt);
-        });
-    })
+        })
 
-   
+    }
+
 }
 
 /* funcion para ejecutar el programa principal */

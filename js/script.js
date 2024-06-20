@@ -2,12 +2,13 @@
 const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
 class Estudiante {
-    constructor (nombre, apellido, nota1, nota2, nota3, promedio = 0, estado = 0) {
+    constructor (nombre, apellido, nota1, nota2, nota3, promedio = 0, estado = 0, ) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
         this.notas = [nota1, nota2, nota3]
         this.estado = estado;
-        this.promedio = promedio; 
+        this.promedio = promedio;
+        
     }
 
     promediarNotas() {
@@ -226,17 +227,31 @@ function promediosCalculados() {
     return promedios_listos
 }
 
+/*funcion para llegar combobox con datos*/
+function cargarDatosCombo() {
 
+    comboOpciones = document.querySelector("#asignaturas");
+
+    fetch("https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/")
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(element => {
+            const opt = document.createElement("option");
+            console.log(element['Nombre Asignatura']);
+            opt.setAttribute("value", element['Nombre Asignatura']);
+            opt.innerHTML = element['Nombre Asignatura']
+            comboOpciones.appendChild(opt);
+        });
+    })
+
+   
+}
 
 /* funcion para ejecutar el programa principal */
 function main()
 {
 
-    /* TEST FETCH Recuperar datos de asignaturas */
-    fetch("https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/")
-    .then(response => response.json())
-    .then(data => console.table(data))
-
+    cargarDatosCombo();
     /* Añade el manejo de eventos mediante los botones */
     let btn_calcular_promedios = document.getElementById("calcular-promedios");
     btn_calcular_promedios.addEventListener("click", calcularPromedios);

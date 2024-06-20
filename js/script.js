@@ -51,7 +51,7 @@ function ingresarNota(n_nota) {
     if(nota >= 1.0 && nota <= 7.0)
         return nota;
     else
-        alert("Debe ingresar una nota válida (entre 1.0 y 7.0)!");
+        Swal.fire("Debe ingresar una nota válida (entre 1.0 y 7.0)!")    
     ingresarNota();
 
 }
@@ -62,7 +62,7 @@ function ingresarDato(clave){
     if(dato.length > 0)
         return dato;
     else
-        alert("El " + clave.toUpperCase() + " debe tener como mínumo 1 caracter!");
+        Swal.fire("El " + clave.toUpperCase() + " debe tener como mínumo 1 caracter!")
     ingresarDato(clave);
 }
 
@@ -81,9 +81,9 @@ function cerrarEstudiantes(){
     // Procesar
     let n_estudiantes = 0
     if(estudiantes.length == 0)
-        alert("No hay estudiantes agregados para cerrar asignatura!");
+        Swal.fire("No hay estudiantes agregados para cerrar asignatura!");
     else if(!promediosCalculados())
-        alert("Primero debe presionar calcular promedios antes de cerrar asignatura!");
+        Swal.fire("Primero debe presionar calcular promedios antes de cerrar asignatura!");
     else {
         for(const estudiante of estudiantes) {
             estudiante.cerrarAsignatura();
@@ -92,11 +92,10 @@ function cerrarEstudiantes(){
         limpiarTabla();
         escribirTabla();
         guardarInformacion();
-        //alert("Asignatura cerradas para " + n_estudiantes + " estudiantes en total!");
+        Swal.fire("Asignarturas cerradas correctamente!");
     }
 
 }
-
 
 function escribirTabla() {
 
@@ -162,19 +161,19 @@ function guardarInformacion() {
 function recuperarInformacion() {
 
     let ls_estudiantes = JSON.parse(localStorage.getItem("estudiantes"));
-    console.log(ls_estudiantes);
+    //console.log(ls_estudiantes);
     for(const e in ls_estudiantes){
         const nombre = ls_estudiantes[e]['nombre'];
         const apellido = ls_estudiantes[e]['apellido'];
         const notas = ls_estudiantes[e]['notas'];
-        console.log(ls_estudiantes[e]['notas']);
+        //console.log(ls_estudiantes[e]['notas']);
         const estado = ls_estudiantes[e]['estado'];
         const promedio = ls_estudiantes[e]['promedio'];
         const asignatura = ls_estudiantes[e]['asignatura']
-        console.log("ESTADO GUARDADO: ")
-        console.log(ls_estudiantes[e]['estado'])
-        console.log("PROMEDIO GUARDADO: ")
-        console.log(ls_estudiantes[e]['promedio'])
+        //console.log("ESTADO GUARDADO: ")
+        //console.log(ls_estudiantes[e]['estado'])
+        //console.log("PROMEDIO GUARDADO: ")
+        //console.log(ls_estudiantes[e]['promedio'])
         estudiantes.push(new Estudiante(nombre, apellido, notas[0], notas[1], notas[2], asignatura, promedio, estado));
    
     }
@@ -191,18 +190,19 @@ function limpiarTabla() {
 function calcularPromedios() {
     
     if(estudiantes.length == 0)
-        alert("No hay estudiantes ingresados para calcular promedios!");
+        Swal.fire("No hay estudiantes ingresados para calcular promedios!");
     else {
         // Recorrer la tabla para calcular todos los promedios de estudiantes.
         for(const e of estudiantes) {
             e.promediarNotas();
-            console.log(e.promedio);
+            //console.log(e.promedio);
         }
    
          // Actualizar promedios de tabla
         limpiarTabla();
         escribirTabla();
         guardarInformacion();
+        Swal.fire("Promedios calculados exitosamente!");
     }
         
    
@@ -230,7 +230,7 @@ function promediosCalculados() {
     return promedios_listos
 }
 
-/*funcion para llegar combobox con datos, función asíncrona */
+
 async function cargarDatosCombo() {
 
     comboOpciones = document.querySelector("#asignaturas");
@@ -241,12 +241,10 @@ async function cargarDatosCombo() {
         let peticion = await fetch(apiURL);
         respuesta = await peticion.json();
     } catch(err) {
-        console.log("Error al procesar la petición al servidor", err);
-        alert("No se ha podido completar la carga de nombres de asignatura!");
+        Swal.fire("No se ha podido completar la carga de nombres de asignatura!");
     } finally {
         respuesta.forEach(element => {
             const opt = document.createElement("option");
-            console.log(element['Nombre Asignatura']);
             opt.setAttribute("value", element['Nombre Asignatura']);
             opt.innerHTML = element['Codigo Asignatura'] + " - " + element['Nombre Asignatura']
             comboOpciones.appendChild(opt);
@@ -261,6 +259,7 @@ function main()
 {
 
     cargarDatosCombo();
+
     /* Añade el manejo de eventos mediante los botones */
     let btn_calcular_promedios = document.getElementById("calcular-promedios");
     btn_calcular_promedios.addEventListener("click", calcularPromedios);
@@ -285,17 +284,15 @@ function main()
         const asignatura = document.getElementById("asignaturas").value
 
         if(nota1 < 1 || nota1 > 7)
-            alert("Una de las notas es inválida!")
+            Swal.fire("Una de las notas es inválida!")
         else if(nota2 < 1 || nota2 > 7)
-            alert("Una de las notas es inválida!")
+            Swal.fire("Una de las notas es inválida!")
         else if(nota3 < 1 || nota3 > 7)
-            alert("Una de las notas es inválida!")
+            Swal.fire("Una de las notas es inválida!")
         else {            
-            console.log("Datos leidos")
             estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3, asignatura))
             escribirTabla();
             guardarInformacion();
-            // Limpiar ahora
             limpiarCuadrosEntrada();
         }
 

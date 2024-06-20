@@ -226,9 +226,16 @@ function promediosCalculados() {
     return promedios_listos
 }
 
+
+
 /* funcion para ejecutar el programa principal */
 function main()
 {
+
+    /* TEST FETCH Recuperar datos de asignaturas */
+    fetch("https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/")
+    .then(response => response.json())
+    .then(data => console.table(data))
 
     /* Añade el manejo de eventos mediante los botones */
     let btn_calcular_promedios = document.getElementById("calcular-promedios");

@@ -2,13 +2,13 @@
 const estudiantes = [] // Arreglo para almacenar objetos estudiantes
 
 class Estudiante {
-    constructor (nombre, apellido, nota1, nota2, nota3, promedio = 0, estado = 0, ) {
+    constructor (nombre, apellido, nota1, nota2, nota3, asignatura, promedio = 0, estado = 0, ) {
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
         this.notas = [nota1, nota2, nota3]
         this.estado = estado;
         this.promedio = promedio;
-        
+        this.asignatura = asignatura;
     }
 
     promediarNotas() {
@@ -110,6 +110,7 @@ function escribirTabla() {
         <tr>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
+        <th scope="col">Asignatura</th>
         <th scope="col">Nota 1</th>
         <th scope="col">Nota 2</th>
         <th scope="col">Nota 3</th>
@@ -126,6 +127,7 @@ function escribirTabla() {
             <tr>
                 <td>${e.nombre}</td>
                 <td>${e.apellido}</td>
+                <td>${e.asignatura}</td>
                 <td>${e.notas[0]}</td>
                 <td>${e.notas[1]}</td>
                 <td>${e.notas[2]}</td>
@@ -168,11 +170,12 @@ function recuperarInformacion() {
         console.log(ls_estudiantes[e]['notas']);
         const estado = ls_estudiantes[e]['estado'];
         const promedio = ls_estudiantes[e]['promedio'];
+        const asignatura = ls_estudiantes[e]['asignatura']
         console.log("ESTADO GUARDADO: ")
         console.log(ls_estudiantes[e]['estado'])
         console.log("PROMEDIO GUARDADO: ")
         console.log(ls_estudiantes[e]['promedio'])
-        estudiantes.push(new Estudiante(nombre, apellido, notas[0], notas[1], notas[2], promedio, estado));
+        estudiantes.push(new Estudiante(nombre, apellido, notas[0], notas[1], notas[2], asignatura, promedio, estado));
    
     }
         
@@ -239,7 +242,7 @@ function cargarDatosCombo() {
             const opt = document.createElement("option");
             console.log(element['Nombre Asignatura']);
             opt.setAttribute("value", element['Nombre Asignatura']);
-            opt.innerHTML = element['Nombre Asignatura']
+            opt.innerHTML = element['Codigo Asignatura'] + " - " + element['Nombre Asignatura']
             comboOpciones.appendChild(opt);
         });
     })
@@ -273,6 +276,8 @@ function main()
         const nota2 = parseFloat(document.getElementById("Nota 2").value)
         const nota3 = parseFloat(document.getElementById("Nota 3").value)
 
+        const asignatura = document.getElementById("asignaturas").value
+
         if(nota1 < 1 || nota1 > 7)
             alert("Una de las notas es inválida!")
         else if(nota2 < 1 || nota2 > 7)
@@ -281,7 +286,7 @@ function main()
             alert("Una de las notas es inválida!")
         else {            
             console.log("Datos leidos")
-            estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3))
+            estudiantes.push(new Estudiante(nombre, apellido, nota1, nota2, nota3, asignatura))
             escribirTabla();
             guardarInformacion();
             // Limpiar ahora

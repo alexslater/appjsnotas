@@ -234,7 +234,7 @@ function promediosCalculados() {
 async function cargarDatosCombo() {
 
     comboOpciones = document.querySelector("#asignaturas");
-    let apiURL = "https://0edf5b03e3624039978269a5d060cf58.api.mockbin.io/";
+    let apiURL = "https://666f7792f1e1da2be522ddf1.mockapi.io/asignaturas";
     let respuesta = {"Codigo Asignatura":"ABDC0000", "Nombre Asignatura": "N/A"};
 
     try {
